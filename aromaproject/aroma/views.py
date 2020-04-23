@@ -3,6 +3,7 @@ from django.views.generic import View
 from django.http import HttpResponse
 from .settings.base import *
 from .models import *
+import json
 
 # Create your views here.
 
@@ -366,14 +367,12 @@ class LibraryView(View):
 		'image': 'aroma/img/home/hero-slide3.png'}
 		]
 		
-		return render(request, 'aroma/library.html', {'site_name': SITE_NAME,
-		'phone_number': PHONE_NUMBER,
-		'email': EMAIL,
-		'site_url': SITE_URL,
-		'address': ADDRESS,
-		'carousel_goods': carousel_goods,
-		'prod': prod,
-		'books': books})
+		
+		if not request.is_ajax():
+			return render(request, 'aroma/library.html', {'site_name': SITE_NAME, 'phone_number': PHONE_NUMBER,'email': EMAIL,'site_url': SITE_URL,'address': ADDRESS,'carousel_goods': carousel_goods,'prod': prod,'books': books})
+		else:
+			return HttpResponse(json.dumps({'books': books}), content_type='application/json')
+
 
 
 class LibraryAddView(View):
