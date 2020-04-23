@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import mimetypes
-mimetypes.add_type('text/css', '.css', True)
+mimetypes.add_type('text/css', '.css')
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('image/svg+xml', '.svg')
 

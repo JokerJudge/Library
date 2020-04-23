@@ -5,6 +5,11 @@
 
 {% block content %}
 
+
+  <link rel="stylesheet" href="{% static 'aroma/build/bundle.css'%}">
+  <link rel="stylesheet" href="{% static 'aroma/build/bundle.js'%}">
+
+
   <main class="site-main">
     
     <!--================ Hero banner start =================-->
@@ -47,8 +52,11 @@
 
     <!-- ================ trending product section start ================= -->  
     <section class="section-margin calc-60px">
-      <div class="container">
-        <div class="section-intro pb-60px">
+	  <div class="container">
+        <div class="row" id="books">
+		</div>
+		<!--
+		<div class="section-intro pb-60px">
           <p>{% trans 'Popular Item in the market'%}</p>
           <h2>{% trans 'Trending'%} <span class="section-intro__style">{% trans 'Product'%}</span></h2>
         </div>
@@ -75,6 +83,7 @@
 		  {% endfor %}
 		  
         </div>
+		-->
       </div>
     </section>
     <!-- ================ trending product section end ================= -->  
