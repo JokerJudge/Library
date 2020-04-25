@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.http import HttpResponse
 from .settings.base import *
 from .models import *
+from .forms import *
 
 # Create your views here.
 
@@ -378,11 +379,21 @@ class LibraryView(View):
 
 class LibraryAddView(View):
 	def get(self, request):
-		
+		form = BookForm()
 			
 		return render(request, 'aroma/library-add.html', {'site_name': SITE_NAME,
 		'phone_number': PHONE_NUMBER,
 		'email': EMAIL,
 		'site_url': SITE_URL,
-		'address': ADDRESS
+		'address': ADDRESS,
+		'form': form
 		})
+
+	def post(self, request):
+
+		bound_form = BookForm(request.POST)
+		if bound_form.is_valid():
+			new_book = bound_form.save()
+			return redirect('library-add')
+		return render(request, 'aroma/library-add.html', {'form': bound_form})
+
