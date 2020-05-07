@@ -47,3 +47,12 @@ class BookForm(forms.ModelForm): #было forms.Form
     #    return new_book
 
 #bk = Book({'title': 'dscdds', 'author': 'fdsvvs', 'genre': '32d', 'pages': '1212', 'format': 'enak', 'publish_year': '1212'})
+
+class BookSearchForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title']
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'})
+        }

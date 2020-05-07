@@ -15,5 +15,7 @@ urlpatterns = [
 	path('single-product/', SingleProductView.as_view(), name='single-product'),
 	path('tracking-order/', TrackingOrderView.as_view(), name='tracking-order'),
 	path('library/', LibraryView.as_view(), name='library'),
-	path('library-add', LibraryAddView.as_view(), name='library-add')
+	path('library-add', LibraryAddView.as_view(), name='library-add'),
+	path('library-search', LibrarySearchView.as_view(), name='library-search'),
+	path('library-update', LibraryUpdateView.as_view(), name='library-update')
 ]

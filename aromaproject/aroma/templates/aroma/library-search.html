@@ -11,8 +11,8 @@
     <section class="section-margin calc-60px">
         <div class="container">
             <div class="section-intro pb-60px">
-                <h2> Adding a book to the <span class="section-intro__style">Library</span></h2>
-                <form action="{% url 'library-add'%}" method="post">
+                <h2> Searching for a book in <span class="section-intro__style">Library</span></h2>
+                <form action="{% url 'library-search'%}" method="post">
                     {% csrf_token %}
 
                     {% for field in form%}
@@ -29,18 +29,17 @@
                         </div>
 
                     {% endfor %}
-                    <button type="submit" class="btn btn-primary">Add a book</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
+            {% if query %}
+            <div class="container">
+                <p>Search query: {{ query }}</p>
+            </div>
+            {% endif %}
+
         </div>
     </section>
-
-    <!--<div class="container">
-        <script>
-            тут нужно написать, что книга добавлена (при нажатии на кнопку)
-        </script>
-    </div> -->
-
     <!-- ================ trending product section end ================= -->
 
 

@@ -397,3 +397,63 @@ class LibraryAddView(View):
 			return redirect('library-add')
 		return render(request, 'aroma/library-add.html', {'form': bound_form})
 
+
+class LibraryUpdateView(View):
+	def get(self, request):
+		form = BookForm()
+
+		return render(request, 'aroma/library-update.html', {'site_name': SITE_NAME,
+														  'phone_number': PHONE_NUMBER,
+														  'email': EMAIL,
+														  'site_url': SITE_URL,
+														  'address': ADDRESS,
+														  'form': form
+														  })
+
+	def post(self, request):
+		bound_form = BookForm(request.POST)
+		if bound_form.is_valid():
+			new_book = bound_form.save()
+			return redirect('library')
+		return render(request, 'aroma/library.html', {'form': bound_form})
+
+class LibrarySearchView(View):
+	def get(self, request):
+		form = BookSearchForm()
+
+		return render(request, 'aroma/library-search.html', {'site_name': SITE_NAME,
+														  'phone_number': PHONE_NUMBER,
+														  'email': EMAIL,
+														  'site_url': SITE_URL,
+														  'address': ADDRESS,
+														  'form': form
+														  })
+
+	def post(self, request):
+		form = BookSearchForm()
+		query = request.POST['title']
+		list_of_books = []
+		b = Book.objects.all()
+		set = Book.objects.filter(title__icontains=query)
+		print()
+		print(type(set))
+		print()
+		print(type(b))
+		'''
+		# вот это нужно использовать, чтобы вывести список найденных книг на сайт
+		books = []
+		for object in Book.objects.all():
+			d = dict(title=object.title,
+					 author=object.author,
+					 genre=object.genre,
+					 pages=object.pages,
+					 format=object.format,
+					 publish_year=object.publish_year)
+			books.append(d)
+		'''
+		return render(request, 'aroma/library-search.html', {'query': query, 'form': form})
+
+		# if bound_form.is_valid():
+		# 	new_book = bound_form.save()
+		# 	return redirect('library')
+		# return render(request, 'aroma/library.html', {'form': bound_form})
